@@ -20,11 +20,11 @@ HEAP_SIZE = 0x100 ;
 
 
 /**
- * Initial user stack pointer = end of RAM (stack grows downwards).
+ * Initial user stack pointer = end of RAM + 1 (stack is fully-descending).
  * ARM Architecture Procedure Call Standard (AAPCS) requires
- * 8 byte stack alignment. 
+ * 8-byte stack alignment. 
  */
-PROVIDE ( _estack = ALIGN(ORIGIN(RAM) + LENGTH(RAM) - 8 ,8) );
+PROVIDE ( _estack = (ORIGIN(RAM) + LENGTH(RAM)) & ~0x7 );
 
 SECTIONS
 {
